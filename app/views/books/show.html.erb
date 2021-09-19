@@ -36,7 +36,7 @@
      <% end %>
     </div>
 
-     <div class='col-md8 offset-md-1'>
+     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
        <thead>
@@ -47,6 +47,11 @@
         </tr>
        </thead>
        <tbody>
+        <tr>
+         <td><%= attachment_image_tag @book.user, :image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %></td>
+         <td><%= @book.title %></td>
+         <td><%= @book.body %></td>
+        </tr>
        </tbody>
       </table>
      </div>
