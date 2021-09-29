@@ -17,6 +17,18 @@
          </td>
          <td><%= link_to @book.title, book_path(@book.id) %></td>
          <td><%= @book.body %></td>
+         <td>
+        <% if @book.favorited_by?(current_user) %>
+            <%= link_to book_favorites_path(@book), method: :delete do %>
+              ♥<%= @book.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to book_favorites_path(@book), method: :post do %>
+              ♡<%= @book.favorites.count %>
+            <% end %>
+        <% end %>
+        </td>
+        <td>コメント数：<%= @book.post_comments.count %></td>
          <% if @user.id == current_user.id %>
          <td><%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %></td>
          <td>
@@ -26,6 +38,31 @@
         </tr>
        </tbody>
       </table>
+      <table>
+       <% @book.post_comments.each do |post_comment| %>
+        <tr>
+          <td>
+           <%= link_to user_path(@book.user.id) do %>
+             <%= attachment_image_tag @book.user, :image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg" %><br>
+             <%= @user.name %>
+           <% end %>
+          </td>
+          <td><%= post_comment.comment %></td>
+          <% if post_comment.user == current_user %>
+           <td>
+            <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete %>
+           </td>
+          <% end %>
+        </tr>
+       <% end %>
+      </table>
+       <tr>
+         <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
+         <td><%= f.text_area :comment, row: '5', size: "50x4" %><br>
+          <%= f.submit "送信" %>
+         <% end %>
+         </td>
+       </tr>
      </div>
 
    </div>

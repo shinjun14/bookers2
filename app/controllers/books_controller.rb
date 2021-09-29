@@ -23,6 +23,7 @@ before_action :authenticate_user!
   def show
     @book = Book.find(params[:id])
     @user = @book.user
+    @post_comment = PostComment.new
   end
 
   def edit
@@ -52,7 +53,9 @@ before_action :authenticate_user!
   end
 
   private
+
   def book_params
     params.require(:book).permit(:title, :body, :image)
   end
+
 end
