@@ -8,6 +8,27 @@
         <tr>
          <th>introduction</th>
          <th><%= user.introduction %></th>
+         <tr>
+          <th>follows</th>
+          <th>
+           <%= link_to user_followings_url(user.id) do %>
+             <%= user.followings.count %>
+           <% end %>
+          </th>
+         </tr>
+         <tr>
+          <th>followers</th>
+          <th>
+           <%= link_to user_followers_url(user.id) do %>
+            <%= user.followers.count %>
+           <% end %>
+          </th>
+         </tr>
+         <tr>
+          <% if user.id != current_user.id %>
+            <td><%= render "relationships/button", user: user %></td>
+          <% end %>
+         </tr>
         </tr>
       </table>
 

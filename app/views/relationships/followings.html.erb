@@ -1,10 +1,9 @@
- <main>
+<h2>Followings Users</h2>
+<% if @users.exists? %>
+<main>
   <p id="notice"></p>
-  <div class='container px-5 px-sm-0'>
+  <div class='container px-3 px-sm-0'>
    <div class='row'>
-    <%= render 'books/list', book: @books, user: @user %>
-    <div class='col-md-8 offset-md-1'>
-     <h2>Users</h2>
      <table class='table'>
       <thead>
        <tr>
@@ -20,15 +19,14 @@
         <td><%= user.name %></td>
         <td>フォロー数：<%= user.followings.count %></td>
         <td>フォロワー数：<%= user.followers.count %></td>
-        <% if user.id != current_user.id %>
-          <td><%= render "relationships/button", user: user %></td>
-        <% end %>
         <td><%= link_to "Show", user_path(user.id) %></td>
        </tr>
        <% end %>
       </tbody>
      </table>
-    </div>
    </div>
   </div>
 </main>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>
