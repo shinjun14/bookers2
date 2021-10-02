@@ -1,0 +1,32 @@
+<main>
+  <p id="notice"></p>
+  <div class='container px-3 px-sm-0'>
+   <div class='row'>
+     <table class='table'>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Introduction</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="post">
+        <% users.each do |user| %>
+         <tr>
+          <td><%= attachment_image_tag user, :profile_image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg" %></td>
+          <td>
+            <%= link_to user_path(user.id) do %>
+             <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.introduction %></td>
+         </tr>
+        <% end %>
+        </tbody>
+     </table>
+   </div>
+  </div>
+</main>

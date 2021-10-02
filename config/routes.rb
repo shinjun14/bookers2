@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'home#top'
   get 'home/about'
 
+  get '/search', to: 'searches#search'
+
   resources :books, only: [:create, :show, :index, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
