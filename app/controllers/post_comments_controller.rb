@@ -2,10 +2,10 @@ class PostCommentsController < ApplicationController
 
   def create
     book = Book.find(params[:book_id])
-    comment = current_user.post_comments.new(post_comment_params)
-    comment.book_id = book.id
-    comment.save
-    redirect_to book_path(book.id)
+    @comment = current_user.post_comments.new(post_comment_params)
+    @comment.book_id = book.id
+    @book = book
+    @comment.save
   end
 
   def destroy
@@ -16,7 +16,7 @@ class PostCommentsController < ApplicationController
   private
 
   def post_comment_params
-    params.require(:post_comment).permit(:comment)
+    params.require(:post_comment).permit(:comment).merge(user_id: current_user.id, book_id: params[:book_id])
   end
 
 end
