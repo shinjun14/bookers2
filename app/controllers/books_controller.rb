@@ -5,6 +5,7 @@ before_action :authenticate_user!
     @books = Book.page(params[:page]).reverse_order
     @book = Book.new
     @user = current_user
+    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
 
   def create
