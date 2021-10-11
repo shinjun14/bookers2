@@ -32,7 +32,7 @@
       </table>
       <table class= "commentsArea">
        <div>
-        <%= render partial: "post_comments/comment", locals: { post_comments: @post_comments, book: @book }%>
+        <%= render "post_comments/comment", book: @book %>
        </div>
       </table>
        <tr>
